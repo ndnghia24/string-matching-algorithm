@@ -101,6 +101,5 @@ int main(int argc, char* argv[]) {
     ofstream fo("ans " + argvVector[1] + " " + argvVector[2] + ".txt");
     fo << runTime << endl << countCmpFirst;
 
-    cout << "123456789";
     return 0;
 }
