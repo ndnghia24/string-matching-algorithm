@@ -26,5 +26,14 @@
     <ClInclude Include="TwoWayMatching.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BruteForce.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RabinKarp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoyerMoore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

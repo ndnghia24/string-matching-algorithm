@@ -60,7 +60,7 @@ pair<int, int> crit_fact(string x, long long& countCmp)
 
 vector<int> two_way_matching(string x, string t, long long& countCmp)
 {
-	int i, j, ell, per, memory;
+	int i, j, ell, per, memory, check = 0;
 	long long countCmpFirst;
 	int n = t.size(), m = x.size();
 	pair<int, int> maxSuf = crit_fact(x, countCmp);
@@ -86,7 +86,10 @@ vector<int> two_way_matching(string x, string t, long long& countCmp)
 				{
 					ans.push_back(j);
 					if (ans.size() == 1)
+					{
 						countCmpFirst = countCmp;
+						check = 1;
+					}
 				}
 				j += per;
 				memory = m - per - 1;
@@ -117,7 +120,10 @@ vector<int> two_way_matching(string x, string t, long long& countCmp)
 				{
 					ans.push_back(j);
 					if (ans.size() == 1)
+					{
 						countCmpFirst = countCmp;
+						check = 1;
+					}
 				}
 				j += per;
 			}
@@ -125,6 +131,7 @@ vector<int> two_way_matching(string x, string t, long long& countCmp)
 				j += (i - ell);
 		}
 	}
-	countCmp = countCmpFirst;
+	if (check)
+		countCmp = countCmpFirst;
 	return ans;
 }

@@ -8,8 +8,18 @@
 using namespace std;
 
 // function lib
+#include "BruteForce.h"
+#include "RabinKarp.h"
 #include "KmpSearching.h"
+#include "BoyerMoore.h"
 #include "TwoWayMatching.h"
+
+void toFile(string filename, vector<int> startID, int n) {
+    ofstream fout(filename);
+    for (int i = 0; i < startID.size(); i++)
+        fout << startID[i] << " " << startID[i] + n - 1 << endl;
+    fout.close();
+}
 
 int main(int argc, char* argv[]) {
 
@@ -42,12 +52,23 @@ int main(int argc, char* argv[]) {
     };
   
     map<int, pair<vector<int>(*) (string, string, long long&), string>> algo = {
-        //{1,{brute_force, "Brute-force"}},
-        //{2,{rabin_karp, "Rabin-Karp"}},
-        {3, {knuth_morris_pratt,"Knuth-Morris-Pratt"}},
-        //{4,{boyer_moore, "Boyer–Moore"}},
-        {5, {two_way_matching, "Two-way algorithm"}},
+        {1,{brute_force, "Brute-force"}},
+        {2,{rabin_karp, "Rabin-Karp"}},
+        {3,{knuth_morris_pratt,"Knuth-Morris-Pratt"}},
+        {4,{boyer_moore, "Boyer–Moore"}},
+        {5,{two_way_matching, "Two-way algorithm"}},
     };
+    // check input
+    if (ID_algo[argvVector[1]] > 5 || ID_algo[argvVector[1]] < 1) {
+        cout << "Wrong algorithms!";
+        system("pause");
+        return -1;
+    }
+    if (ID_info[argvVector[4]] > 3 || ID_info[argvVector[4]] < 1) {
+        cout << "Wrong output status!";
+        system("pause");
+        return -1;
+    }
 
     // read 2 string from input file
     ifstream fin(argvVector[2]);
@@ -57,8 +78,12 @@ int main(int argc, char* argv[]) {
         return -1;
     }
     string src, pat;
+    /*
     getline(fin, src);
     getline(fin, pat);
+    */
+    getline(fin, pat);
+    getline(fin, src);
     fin.close();
 
     // init variable
@@ -84,10 +109,7 @@ int main(int argc, char* argv[]) {
     double runTime = chrono::duration_cast<chrono::nanoseconds>(endTime - startTime).count() / 1000000.0;
 
     // output pattern's location in source string to file
-    ofstream fout(argvVector[3]);
-    for (int i = 0; i < startID.size(); i++)
-        fout << startID[i] << " " << startID[i] + pat.size() - 1 << endl;
-    fout.close();
+    toFile(argvVector[3], startID, pat.size());
 
     // print runtime & number of comparisons
     cout << "_________________________\n\n";
@@ -96,10 +118,6 @@ int main(int argc, char* argv[]) {
         cout << "Running time : " << runTime  << " (ms) " << endl;
     if (i == 2 || i == 3)
         cout << "Number of comparisons of the first successful searching : " << countCmpFirst << endl << endl;
-
-    // COLLECTING FOR PROJECT
-    ofstream fo("ans " + argvVector[1] + " " + argvVector[2] + ".txt");
-    fo << runTime << endl << countCmpFirst;
 
     return 0;
 }

@@ -142,7 +142,10 @@
     <ClCompile Include="StringMatching.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoyerMoore.h" />
+    <ClInclude Include="BruteForce.h" />
     <ClInclude Include="KmpSearching.h" />
+    <ClInclude Include="RabinKarp.h" />
     <ClInclude Include="TwoWayMatching.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
