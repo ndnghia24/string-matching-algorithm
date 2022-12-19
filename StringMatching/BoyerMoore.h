@@ -20,6 +20,7 @@ vector<int> lastOccurrence(string pat, ll& countCmp) {
     return lo;
 }
 
+// Just for reference
 vector<int> goodSuffixPrepairation(string pat, ll& countCmp) {
     int m = pat.size();
     vector<int>
@@ -57,12 +58,12 @@ vector<int> boyer_moore(string pat, string src, ll& countCmp)
     int m = pat.size();
     int n = src.size();
     int firstFound = 0;
-
     // First heuristic - calculate bad characters table
     vector<int> badChar = lastOccurrence(pat, countCmp);
 
     // Second heuristic - calculate good suffix table
-    vector<int> goodSuff = goodSuffixPrepairation(pat, countCmp);
+    // we do not implement as report do
+    // but we will keep the code for reference
 
     // all position of pat occur in src
     vector<int> posList;
@@ -79,10 +80,6 @@ vector<int> boyer_moore(string pat, string src, ll& countCmp)
             // shift to next possible position
             if (++countCmp && pos + m < n)
                 pos += m - badChar[src[pos + m]];
-            /*
-            if (++countCmp && pos + goodSuff[0] < n && ++countCmp && goodSuff[0] > m - badChar[src[pos + m]])
-                pos += goodSuff[0];
-                */
             else pos++;
         }
         else
@@ -90,6 +87,7 @@ vector<int> boyer_moore(string pat, string src, ll& countCmp)
             pos += max(1, j - badChar[src[pos + j]]),
             ++countCmp;
     }
-
+    if (posList.size() != 0)
+        countCmp = firstFound;
     return posList;
 }
