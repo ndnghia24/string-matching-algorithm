@@ -78,10 +78,6 @@ int main(int argc, char* argv[]) {
         return -1;
     }
     string src, pat;
-    /*
-    getline(fin, src);
-    getline(fin, pat);
-    */
     getline(fin, pat);
     getline(fin, src);
     fin.close();
